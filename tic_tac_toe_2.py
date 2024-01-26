@@ -137,7 +137,6 @@ def main():
         get_sum()# Получить список сумм значений клеток выигрышных комбинаций.
         winning_check() # Проверка выигрыша.
         turn_order *= -1 # Переход очереди хода.
-    #print_game()
     print(RESULT[winner])
 
 if __name__ == "__main__":
