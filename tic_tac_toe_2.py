@@ -85,8 +85,6 @@ def winning_check():
     global winner
     if 3 in sum_lines or -3 in sum_lines:
         winner = turn_order
-        show_winner()
-        
         
 # Показать комбинацию победителя.
 def show_winner():
@@ -137,6 +135,7 @@ def main():
         get_sum()# Получить список сумм значений клеток выигрышных комбинаций.
         winning_check() # Проверка выигрыша.
         turn_order *= -1 # Переход очереди хода.
+    show_winner()
     print(RESULT[winner])
 
 if __name__ == "__main__":
