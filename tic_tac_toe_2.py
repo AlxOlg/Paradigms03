@@ -1,19 +1,22 @@
+"""
+Вырезано "обновление дисплея" и выделение цветом.
+"""
+
 import random
 import time
 
 # Вывод игры в терминал.
 def print_game():
     col_count = 0 # Счетчик столбцов для прехода на следущую строку.
-    print("\033[H\033[J") # "Очистка терминала".
     for i in range(len(cells)): # Цикл по списку значений клеток.
         if cells[i] == 1: # Если значение соответствует человеку.
-            print("\033[33m{}\033[0m".format(PLAYERS[1]), end='') # Печать символа игрока.
+            print(PLAYERS[1], end='') # Печать символа игрока.
         elif cells[i] == 2: # Если значение соответствует победителю-человеку.
-            print("\033[31m{}\033[0m".format(PLAYERS[1]), end='') # Печать символа победителя.
+            print(PLAYERS[1], end='') # Печать символа победителя.
         elif cells[i] == -1: # Если значение соответствует ИИ.
-            print("\033[33m{}\033[0m".format(PLAYERS[-1]), end='') # Печать символа игрока.
+            print(PLAYERS[-1], end='') # Печать символа игрока.
         elif cells[i] == -2: # Если значение соответствует победителю-ИИ.
-            print("\033[31m{}\033[0m".format(PLAYERS[-1]), end='') # Печать символа победителя.
+            print(PLAYERS[-1], end='') # Печать символа победителя.
         else: # Иначе - пустая клетка.
             if winner == 0: # В процессе игры.
                 print(DISPLAY[i], end='') # Номер клетки.
@@ -81,8 +84,9 @@ def find_one_empty(value):
 def winning_check():
     global winner
     if 3 in sum_lines or -3 in sum_lines:
-        show_winner()
         winner = turn_order
+        show_winner()
+        
         
 # Показать комбинацию победителя.
 def show_winner():
@@ -130,10 +134,10 @@ def main():
         else: # Ход ИИ.
             move = move_ai()
         cells[move] = turn_order # Заполнение клетки значением соответствующим игроку.
-        print_game() # Обновление игры в терминале.
         get_sum()# Получить список сумм значений клеток выигрышных комбинаций.
         winning_check() # Проверка выигрыша.
         turn_order *= -1 # Переход очереди хода.
+    #print_game()
     print(RESULT[winner])
 
 if __name__ == "__main__":
