@@ -11,12 +11,8 @@ def print_game():
     for i in range(len(cells)): # Цикл по списку значений клеток.
         if cells[i] == 1: # Если значение соответствует человеку.
             print(PLAYERS[1], end='') # Печать символа игрока.
-        elif cells[i] == 2: # Если значение соответствует победителю-человеку.
-            print(PLAYERS[1], end='') # Печать символа победителя.
         elif cells[i] == -1: # Если значение соответствует ИИ.
             print(PLAYERS[-1], end='') # Печать символа игрока.
-        elif cells[i] == -2: # Если значение соответствует победителю-ИИ.
-            print(PLAYERS[-1], end='') # Печать символа победителя.
         else: # Иначе - пустая клетка.
             if winner == 0: # В процессе игры.
                 print(DISPLAY[i], end='') # Номер клетки.
@@ -85,14 +81,6 @@ def winning_check():
     global winner
     if 3 in sum_lines or -3 in sum_lines:
         winner = turn_order
-        
-# Показать комбинацию победителя.
-def show_winner():
-    for i in range(len(sum_lines)):
-        if abs(sum_lines[i]) == 3:
-            for j in range(len(LINES[i])):
-                cells[LINES[i][j]] *= 2 if abs(cells[LINES[i][j]]) < 2 else None
-    print_game()
 
 # Константы.
 # Символы игроков.
@@ -116,7 +104,7 @@ LINES = (
 # Переменные.
 winner = 0 # Победитель: 0 - нет, 1 - человек, -1 - ИИ.
 # Значения клеток:
-# 0 - пустая, 1 - человек, -1 - ИИ, 2 и -2 победитель соответственно.
+# 0 - пустая, 1 - человек, -1 - ИИ.
 cells = [0 for i in range(9)]
 empty = [] # Свободные клетки.
 sum_lines = [] # Суммы значений клеток выигрышных комбинаций.
@@ -135,7 +123,7 @@ def main():
         get_sum()# Получить список сумм значений клеток выигрышных комбинаций.
         winning_check() # Проверка выигрыша.
         turn_order *= -1 # Переход очереди хода.
-    show_winner()
+    print_game()
     print(RESULT[winner])
 
 if __name__ == "__main__":
